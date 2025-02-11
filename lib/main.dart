@@ -7,20 +7,20 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.orange,
     ),
-    home: chatapp(),
+    home: chatApp(),
   ));
 }
 
 // ignore: camel_case_types
-class chatapp extends StatefulWidget {
-  const chatapp({super.key});
+class chatApp extends StatefulWidget {
+  const chatApp({super.key});
 
   @override
-  State<chatapp> createState() => _chatappState();
+  State<chatApp> createState() => _chatAppState();
 }
 
 // ignore: camel_case_types
-class _chatappState extends State<chatapp> {
+class _chatAppState extends State<chatApp> {
   final List<String> imageList = [
     "https://mum.digitaluniversity.ac/user/pages/images/slides/slide2.jpg",
     "https://mu.ac.in/wp-content/uploads/2020/01/BAJU98172-1024x683.jpg",
@@ -29,7 +29,9 @@ class _chatappState extends State<chatapp> {
     "https://mu.ac.in/wp-content/uploads/2023/06/RDK-292x300.jpg",
     "https://mu.ac.in/wp-content/uploads/2019/01/Auditorim-410x260.jpg",
     "https://mu.ac.in/wp-content/uploads/2019/01/rr1.jpg",
-  ]; // Added semicolon here
+  ];
+
+  // This method creates the cards with images
   // ignore: non_constant_identifier_names
   Widget _BScard(int value) {
     String url = "";
@@ -55,32 +57,28 @@ class _chatappState extends State<chatapp> {
         url,
         fit: BoxFit.fill,
         width: 150.0,
-        height: 150.0,
+        height: 140.0,
       ),
     );
   }
 
+  // This method creates the details for each card
   // ignore: non_constant_identifier_names
   Widget _BSDetails(String Degree, String prof, int value) {
-    // ignore: non_constant_identifier_names
-    String Desp = "";
+    String desp = "";
     if (value == 1) {
-      Desp =
-          "BSCS stands for Bachelor of Science in Computer Science. It's a 3-year undergraduate degree program that prepares students for careers in the computing industry. ";
+      desp = "BScCS stands for Bachelor Computer Science.";
     } else if (value == 2) {
-      Desp =
-          "B.Com is an undergraduate academic degree awarded for a course or program in Commerce";
+      desp = "B.Com stands for Bachelor of Commerce";
     } else if (value == 3) {
-      Desp =
-          " Bachelor of Arts (BA) is an undergraduate degree that focuses on liberal arts and general education.";
+      desp = " Bachelor of Arts (BA) is an undergraduate degree.";
     } else if (value == 4) {
-      Desp =
-          " BAF is Bachelor of Accounting and Finance, which is an undergraduate degree course that provides students with knowledge in accounting and finance.";
+      desp = " BAF is Bachelor of Accounting and Finance.";
     }
 
     return SizedBox(
         width: double.infinity,
-        height: 120.0,
+        height: 130.0,
         child: Card(
           child: Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
@@ -89,12 +87,12 @@ class _chatappState extends State<chatapp> {
                 Text(
                   Degree,
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.0,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 10.0,
                   ),
                 ),
                 SizedBox(
-                  width: 135.0,
+                  width: 170.0,
                   child: Divider(),
                 ),
                 Text(
@@ -105,10 +103,10 @@ class _chatappState extends State<chatapp> {
                   child: Divider(),
                 ),
                 Text(
-                  Desp,
+                  desp,
                 ),
                 SizedBox(
-                  width: 100.0,
+                  width: 150.0,
                   child: Divider(),
                 ),
               ],
@@ -119,56 +117,55 @@ class _chatappState extends State<chatapp> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Student Assistant"),
         centerTitle: true,
       ),
-      body: ListView(
-        padding: EdgeInsets.only(top: 40.0),
-        children: [
-          Center(
-            child: CarouselSlider(
-              options: CarouselOptions(
-                enlargeCenterPage: true,
-                enableInfiniteScroll: true,
-                autoPlay: true,
+      body: SingleChildScrollView(
+        // Wrap the entire body here
+        child: Column(
+          children: [
+            // Make the Carousel dynamic based on screen height
+            Center(
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: true,
+                  autoPlay: true,
+                ),
+                items: imageList
+                    .map((e) => ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.network(
+                                e,
+                                width: 1050.0,
+                                height: screenHeight *
+                                    0.4, // Adjust the height dynamically
+                                fit: BoxFit.cover,
+                              )
+                            ],
+                          ),
+                        ))
+                    .toList(),
               ),
-              items: imageList
-                  .map((e) => ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Image.network(
-                              e,
-                              width: 1050.0,
-                              height: 350.0,
-                              fit: BoxFit.cover,
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(), // Added .toList() here
             ),
-          ),
-          // ignore: unnecessary_new
-          new Divider(
-            height: 50.0,
-          ),
-          _BScard(1),
-          _BSDetails("BSc CS (3 YEARS)", "Prof. Amresh Satose", 1),
-          //BScCS 3 year
-          _BScard(2),
-          _BSDetails("BCom (3 YEARS)", "Prof. Bolke", 2),
-          //BCom 3 year
-          _BScard(3),
-          _BSDetails("BA (3 YEARS)", "Prof. Mumbarkar", 3),
-          //BA 3 year
-          _BScard(4),
-          _BSDetails("BAF (3 YEARS)", "Prof. Padelkar", 4),
-          //BAF 3 year
-        ],
+            Divider(height: 50.0),
+            _BScard(1),
+            _BSDetails("BSc CS (3 YEARS)", "Prof. Amresh Satose", 1),
+            _BScard(2),
+            _BSDetails("BCom (3 YEARS)", "Prof. Bolke", 2),
+            _BScard(3),
+            _BSDetails("BA (3 YEARS)", "Prof. Mumbarkar", 3),
+            _BScard(4),
+            _BSDetails("BAF (3 YEARS)", "Prof. Padelkar", 4),
+          ],
+        ),
       ),
     );
   }
