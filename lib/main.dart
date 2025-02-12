@@ -124,6 +124,73 @@ class _chatAppState extends State<chatApp> {
         title: Text("Student Assistant"),
         centerTitle: true,
       ),
+      // ignore: unnecessary_new
+      drawer: new Drawer(
+          // ignore: unnecessary_new
+          child: new ListView(
+        children: [
+          // ignore: unnecessary_new
+          new UserAccountsDrawerHeader(
+            accountName: Text("MUMBAI UNI"),
+            accountEmail: Text("pednekarjayesh29@gmail.com"),
+            currentAccountPicture: CircleAvatar(
+              child: Image.asset("assets/logo.png"),
+            ),
+          ),
+          Divider(),
+          // ignore: unnecessary_new
+          new ListTile(
+            // ignore: unnecessary_new
+            title: new Text("MUM Site"),
+            // ignore: unnecessary_new
+            trailing: new Icon(Icons.web),
+            // ignore: unnecessary_new
+            onTap: () {
+              // ignore: avoid_print
+              print("Hello MUM Site");
+            },
+          ),
+          Divider(),
+          // ignore: unnecessary_new
+          new ListTile(
+            // ignore: unnecessary_new
+            title: new Text("MUM Time Table"),
+            // ignore: unnecessary_new
+            trailing: new Icon(Icons.timer),
+            // ignore: unnecessary_new
+            onTap: () {
+              // ignore: avoid_print
+              print("Hello MUM Time Table");
+            },
+          ),
+          Divider(),
+          // ignore: unnecessary_new
+          new ListTile(
+            // ignore: unnecessary_new
+            title: new Text("MUM Map Location"),
+            // ignore: unnecessary_new
+            trailing: new Icon(Icons.map),
+            // ignore: unnecessary_new
+            onTap: () {
+              // ignore: avoid_print
+              print("Hello MUM Map Location");
+            },
+          ),
+          Divider(),
+          // ignore: unnecessary_new
+          new ListTile(
+            // ignore: unnecessary_new
+            title: new Text("Privacy"),
+            // ignore: unnecessary_new
+            trailing: new Icon(Icons.timer),
+            // ignore: unnecessary_new
+            onTap: () {
+              // ignore: avoid_print
+              print("Hello Privacy Policy");
+            },
+          ),
+        ],
+      )),
       body: SingleChildScrollView(
         // Wrap the entire body here
         child: Column(
