@@ -123,6 +123,21 @@ class _chatAppState extends State<chatApp> {
       appBar: AppBar(
         title: Text("Student Assistant"),
         centerTitle: true,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                // ignore: avoid_print
+                print("Hello Action Button");
+              },
+              child: Icon(
+                Icons.help,
+                size: 25.0,
+              ),
+            ),
+          )
+        ],
       ),
       // ignore: unnecessary_new
       drawer: new Drawer(
@@ -233,6 +248,15 @@ class _chatAppState extends State<chatApp> {
             _BSDetails("BAF (3 YEARS)", "Prof. Padelkar", 4),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.chat),
+        label: Text("Chat !"),
+        tooltip: 'Connect To Assistant',
+        onPressed: () {
+          // ignore: avoid_print
+          print("Hello Floating Function");
+        },
       ),
     );
   }
